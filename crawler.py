@@ -1,6 +1,6 @@
 import csv
 from array import array
-from time import localtime, strftime, strptime
+from time import strftime
 import time
 from bs4 import BeautifulSoup as bs
 from selenium import webdriver
@@ -46,11 +46,10 @@ soup = bs(driver.page_source, 'html.parser')
 i = 0
 use = 0.0
 cap = 0.0
+now = datetime.now()
 for x in soup.find_all('div', class_ = 'live-tracker')[:-6]:
-    trackerArrays[i].append(strftime("%m-%d-%Y", localtime()))
-    pullTime = strftime("%H:%M", localtime())
-    trackerArrays[i].append(pullTime)
-    trackerArrays[i].append(strftime("%A", localtime()))
+    trackerArrays[i].append(strftime("%m-%d-%Y", now.timetuple()))
+    trackerArrays[i].append(strftime("%H:%M", now.timetuple()))
     trackerArrays[i].append(x.find('p', class_ = 'tracker-location').text)
     updateTime = x.find('p', class_ = 'tracker-update-time').text
     trackerArrays[i].append(updateTime)
@@ -59,17 +58,19 @@ for x in soup.find_all('div', class_ = 'live-tracker')[:-6]:
     cap = float(x.find('span', class_ = 'tracker-max-count').text)
     trackerArrays[i].append('%.2f' % (float(use / cap) * 100.0))
 
-    # TODO: SUBTRACT LAST UPDATE FROM PULL TIME
-    diff = timedelta(hours=1)
-
     if updateTime.strip() == "Currently closed" or updateTime.strip() == "Updated over an hour ago":
         actTime = "n/a"
     elif updateTime.strip() == "Updated an hour ago":
-        actTime = strptime(pullTime, "%H:%M") - diff
+        actTime = now - timedelta(hours=1)
+    elif updateTime.strip() == "Updated moments ago":
+        actTime = now
     else:
-        actTime = strptime(pullTime, "%H:%M") - diff
+        strDiff = updateTime[updateTime.index("Updated")+7:updateTime.index("Updated")+10].strip()
+        actTime = now - timedelta(minutes=int(strDiff))
 
-    trackerArrays[i].append(actTime)
+    trackerArrays[i].append(strftime("%m-%d-%Y", actTime.timetuple()))
+    trackerArrays[i].append(strftime("%H:%M", actTime.timetuple()))
+    trackerArrays[i].append(strftime("%A", actTime.timetuple()))
 
     i+=1
 
