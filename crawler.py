@@ -63,7 +63,7 @@ for x in soup.find_all('div', class_ = 'live-tracker')[:-6]:
     elif updateTime.strip() == "Updated an hour ago":
         actTime = now - timedelta(hours=1)
     elif updateTime.strip() == "Updated moments ago":
-        actTime = now
+        actTime = now - timedelta()
     else:
         strDiff = updateTime[updateTime.index("Updated")+7:updateTime.index("Updated")+10].strip()
         actTime = now - timedelta(minutes=int(strDiff))
