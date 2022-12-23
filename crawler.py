@@ -60,17 +60,25 @@ for x in soup.find_all('div', class_ = 'live-tracker')[:-6]:
 
     if updateTime.strip() == "Currently closed" or updateTime.strip() == "Updated over an hour ago":
         actTime = "n/a"
+        trackerArrays[i].append(actTime)
+        trackerArrays[i].append(actTime)
+        trackerArrays[i].append(actTime)
     elif updateTime.strip() == "Updated an hour ago":
-        actTime = now - timedelta(hours=1)
+        actTime = (now - timedelta(hours=1)).timetuple()
+        trackerArrays[i].append(strftime("%m-%d-%Y", actTime))
+        trackerArrays[i].append(strftime("%H:%M", actTime))
+        trackerArrays[i].append(strftime("%A", actTime))
     elif updateTime.strip() == "Updated moments ago":
-        actTime = now - timedelta()
+        actTime = (now - timedelta()).timetuple()
+        trackerArrays[i].append(strftime("%m-%d-%Y", actTime))
+        trackerArrays[i].append(strftime("%H:%M", actTime))
+        trackerArrays[i].append(strftime("%A", actTime))
     else:
         strDiff = updateTime[updateTime.index("Updated")+7:updateTime.index("Updated")+10].strip()
-        actTime = now - timedelta(minutes=int(strDiff))
-
-    trackerArrays[i].append(strftime("%m-%d-%Y", actTime.timetuple()))
-    trackerArrays[i].append(strftime("%H:%M", actTime.timetuple()))
-    trackerArrays[i].append(strftime("%A", actTime.timetuple()))
+        actTime = (now - timedelta(minutes=int(strDiff))).timetuple()
+        trackerArrays[i].append(strftime("%m-%d-%Y", actTime))
+        trackerArrays[i].append(strftime("%H:%M", actTime))
+        trackerArrays[i].append(strftime("%A", actTime))
 
     i+=1
 
