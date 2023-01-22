@@ -4,9 +4,10 @@ from time import strftime
 import time
 from bs4 import BeautifulSoup as bs
 from selenium import webdriver
-from selenium.webdriver.firefox.service import Service
-from webdriver_manager.firefox import GeckoDriverManager
-from datetime import datetime, date, timedelta
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
+from datetime import datetime, timedelta
 
 # Define tracker attributes
 l1 = []
@@ -30,11 +31,11 @@ def write_to_csv(path: str, delim: str, arr: array):
         mywriter.writerows(arr)
 
 
-fireFoxOptions = webdriver.FirefoxOptions()
-fireFoxOptions.headless = True
+options = Options()
+options.headless = True
 
-driver = webdriver.Firefox(options=fireFoxOptions, 
-    service=Service(GeckoDriverManager().install()))
+driver = webdriver.Chrome(options=options, 
+    service=Service(ChromeDriverManager().install()))
 
 driver.set_page_load_timeout(60)
 
