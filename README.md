@@ -3,7 +3,6 @@ This program is a python web crawler which scrapes data from [https://recwell.wi
 
 Dependencies:
 - Python 3.10+
-- Firefox
-- geckodriver (specify filepath in crawler.py)
+- Chrome
 - selenium
 - Beautiful Soup
