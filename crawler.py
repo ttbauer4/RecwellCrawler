@@ -78,6 +78,6 @@ for x in soup.find_all('div', class_ = 'live-tracker')[:-6]:
 
     i+=1
 
-write_to_csv('/Users/trentonbauer/GitHub/RecwellCrawler/nick_usage.csv', ',', trackerArrays)
+write_to_csv('/home/ttbauer/RecwellCrawler/nick_usage.csv', ',', trackerArrays)
 
 driver.close()
