@@ -29,7 +29,7 @@ def write_to_csv(path: str, delim: str, arr: array):
         mywriter.writerows(arr)
 
 options = Options()
-options.headless = True
+options.add_argument('headless')
 driver = webdriver.Chrome(options=options)
 
 driver.set_page_load_timeout(60)
