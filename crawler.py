@@ -8,7 +8,7 @@ from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.chrome.options import Options
 from datetime import datetime, timedelta
 
-rows = [[], [], [], [], [], [], [], []] # represents the rows in output table
+rows = [[], [], [], [], [], [], [], [], []] # represents the rows in output table
 outputFilePath = "/home/ttbauer/RecwellCrawler/nick_usage.csv" # an absolute or relative path to the output file
 
 '''
