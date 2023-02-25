@@ -71,21 +71,15 @@ except TimeoutException:
     for x in (rows):
         x[0] = strftime("%m-%d-%Y", now.timetuple()) # append pull date as mm/dd/yy
         x[1] = strftime("%H:%M", now.timetuple()) # append pull time as HH:MM in 24-hr format
-        x[2] = "TIMEOUT ERROR"
-        x[3] = "TIMEOUT ERROR"
-        x[4] = "TIMEOUT ERROR"
-        x[5] = "TIMEOUT ERROR"
-        x[6] = "TIMEOUT ERROR"
+        for i in range(len(rows)-2):
+            x[i+2] = "TIMEOUT ERROR"
 
 except:
     for x in (rows):
         x[0] = strftime("%m-%d-%Y", now.timetuple()) # append pull date as mm/dd/yy
         x[1] = strftime("%H:%M", now.timetuple()) # append pull time as HH:MM in 24-hr format
-        x[2] = "UNKNOWN ERROR"
-        x[3] = "UNKNOWN ERROR"
-        x[4] = "UNKNOWN ERROR"
-        x[5] = "UNKNOWN ERROR"
-        x[6] = "UNKNOWN ERROR"
+        for i in range(len(rows)-2):
+            x[i+2] = "UNKNOWN ERROR"
 
 finally:
     write_to_csv(outputFilePath, ',', rows)
