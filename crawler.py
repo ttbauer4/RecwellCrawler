@@ -71,14 +71,14 @@ except TimeoutException:
     for x in (rows):
         x[0] = strftime("%m-%d-%Y", now.timetuple()) # append pull date as mm/dd/yy
         x[1] = strftime("%H:%M", now.timetuple()) # append pull time as HH:MM in 24-hr format
-        for i in range(len(rows)-3):
+        for i in range(len(x)-3):
             x[i+2] = "TIMEOUT ERROR"
 
 except:
     for x in (rows):
         x[0] = strftime("%m-%d-%Y", now.timetuple()) # append pull date as mm/dd/yy
         x[1] = strftime("%H:%M", now.timetuple()) # append pull time as HH:MM in 24-hr format
-        for i in range(len(rows)-3):
+        for i in range(len(x)-3):
             x[i+2] = "UNKNOWN ERROR"
 
 finally:
