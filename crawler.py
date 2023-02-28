@@ -34,7 +34,7 @@ try:
     soup = bs(driver.page_source, 'html.parser') # retrieve page source
 
     now = datetime.now()
-    locations = soup.find_all('div', class_ = 'live-tracker')[:-6] # tag containing info by location
+    locations = soup.find_all('div', class_ = 'live-tracker')[:-3] # tag containing info by location
 
     for i in range(len(rows)):
         rows[i].append(strftime("%m-%d-%Y", now.timetuple())) # append pull date as mm/dd/yy
